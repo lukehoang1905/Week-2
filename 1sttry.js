@@ -1,8 +1,8 @@
 //variables
 const exchangeRate = 23208;
 let amount = prompt("How much?");
-let fcurrency = prompt("From currency:");
-let tcurrency = prompt("To currency");
+let fcurrency = prompt("From currency:").toUpperCase();
+let tcurrency = prompt("To currency").toUpperCase();
 
 //functions
 function exchange(amount) {
