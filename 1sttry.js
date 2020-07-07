@@ -1,17 +1,23 @@
 //variables
-const exchangeRate = 23208;
 let amount = prompt("How much?");
 let fcurrency = prompt("From currency:").toUpperCase();
 let tcurrency = prompt("To currency").toUpperCase();
-
-//functions
-function exchange(amount) {
-    if (fcurrency === 'VND') {
-        result = Math.round((amount / exchangeRate + Number.EPSILON) * 100) / 100;
-        return result
+//exchange dictionary
+const exchangeRate = {
+        USD: 23208,
+        AUD: 15964,
+        CAD: 16915,
+        CHF: 24399,
+        EUR: 25950,
+        GBP: 28600,
+        JPY: 213.45,
+        SGD: 16455,
+        VND: 1
     }
-    result = amount * exchangeRate;
-    return result
+    //always change to VND
+function exchange(amount, fcurrency, tcurrency) {
+    amountVnd = amount * exchangeRate[fcurrency];
+    return Math.round(((amountVnd / exchangeRate[tcurrency]) + Number.EPSILON) * 100) / 100;
 }
 
 function formatCurrency(type, value) {
@@ -25,9 +31,8 @@ function formatCurrency(type, value) {
 if (isNaN(parseInt(amount)) === true) {
     console.log("Error: number only");
 } else {
-    const result = exchange(amount);
+    result = exchange(amount, fcurrency, tcurrency);
     console.log(
-        "Exchange from", fcurrency, result
-    )
+        "Exchange", (formatCurrency(fcurrency, amount)), "to", (formatCurrency(tcurrency, result)),
+    );
 };
-console.log(formatCurrency(tcurrency, result));
